@@ -1,0 +1,32 @@
+policy_module(memmon, 0.1)
+
+########################################
+#
+# Declarations
+#
+type memmon_t;
+type memmon_exec_t;
+init_daemon_domain(memmon_t, memmon_exec_t)
+init_nnp_daemon_domain(memmon_t)
+
+type memmon_etc_t;
+files_config_file(memmon_etc_t)
+
+########################################
+#
+# Local policy
+#
+read_files_pattern(memmon_t, memmon_etc_t, memmon_etc_t)
+kernel_rw_psi(memmon_t)
+
+allow memmon_t self:capability { ipc_lock };
+allow memmon_t self:unix_dgram_socket create_socket_perms;
+
+optional_policy(`
+  dbus_connect_system_bus(memmon_t)
+  dbus_system_bus_client(memmon_t)
+')
+
+optional_policy(`
+  userdom_dbus_send_all_users(memmon_t)
+')

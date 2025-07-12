@@ -1,0 +1,22 @@
+## <summary>policy for low-memory-monitor</summary>
+
+########################################
+## <summary>
+##	Send and receive messages from
+##	low-memory-monitor over dbus.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`memmon_dbus_chat',`
+	gen_require(`
+		type memmon_t;
+		class dbus send_msg;
+	')
+
+	allow $1 memmon_t:dbus send_msg;
+	allow memmon_t $1:dbus send_msg;
+')
