@@ -25,14 +25,12 @@ kernel_rw_all_sysctls(memmon_t)
 
 logging_write_syslog_pid_socket(memmon_t)
 
+userdom_dbus_send_all_users(memmon_t)
+
 allow memmon_t self:capability { ipc_lock };
 allow memmon_t self:unix_dgram_socket create_socket_perms;
 
 optional_policy(`
   dbus_connect_system_bus(memmon_t)
   dbus_system_bus_client(memmon_t)
-')
-
-optional_policy(`
-  userdom_dbus_send_all_users(memmon_t)
 ')
