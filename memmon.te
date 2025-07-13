@@ -17,7 +17,13 @@ files_config_file(memmon_etc_t)
 # Local policy
 #
 read_files_pattern(memmon_t, memmon_etc_t, memmon_etc_t)
+
 kernel_rw_psi(memmon_t)
+kernel_dgram_send(memmon_t)
+kernel_dontaudit_read_system_state(memmon_t)
+kernel_rw_all_sysctls(memmon_t)
+
+logging_write_syslog_pid_socket(memmon_t)
 
 allow memmon_t self:capability { ipc_lock };
 allow memmon_t self:unix_dgram_socket create_socket_perms;

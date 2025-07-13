@@ -26,5 +26,4 @@ $ make -f /usr/share/selinux/devel/Makefile
 ```
 
 ## To-do
- * Verify it can kill processes
  * Generate manpage
