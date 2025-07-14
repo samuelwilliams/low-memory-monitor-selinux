@@ -27,7 +27,8 @@ logging_write_syslog_pid_socket(memmon_t)
 
 userdom_dbus_send_all_users(memmon_t)
 
-allow memmon_t self:capability { ipc_lock };
+allow memmon_t self:capability { ipc_lock setpcap };
+allow memmon_t self:process { setcap };
 allow memmon_t self:unix_dgram_socket create_socket_perms;
 
 optional_policy(`
